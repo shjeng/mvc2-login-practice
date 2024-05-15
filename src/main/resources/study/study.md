@@ -21,8 +21,10 @@
 
 <hr>
 <h3>서블릿 필터-요청로그</h3>
+
 <h5>'HandlerMethod'</h5>
 * 핸들러 정보는 어떤 핸들러 매핑을 사용하는가에 따라 달라진다. 스프링을 사용하면 일반적으로 '@Controller', '@RequestMapping'을 활용한 핸들러 매핑을 사용하는데, 이 경우 핸들러 정보로 ' HandlerMethod'가 넘어온다.
+
 <h5>'ResourceHttpReuqestHandler'</h5>
 * '@Controller'가 아니라 '/resources/static'와 같은 정적 리소스가 호출 되는 경우 'ResourceHttpRequestHandler'가 핸들러 정보로 넘어오기 때문에 타입에 따라서 처리가 필요하다. 
 
@@ -30,3 +32,12 @@
 * 종료 로그를 'postHandle'이 아니라 'afterCompletion'에서 실행한 이유는, 예외가 발생한 경우 'postHandler'가 호출되지 않기 때문이다. 'afterCompletion'은 예외가 발생해도 호출 되는 것을 보장한다. 
 
 <hr>
+
+<h3>스프링 인터셉터-인증 체크</h3>
+
+<p>인터셉터를 적용: 'addPathPatterns' <br> 인터셉터 미적용: 'excludePathPatterns'</p>
+<p>기본적으로 모든 경로에 해당 인터셉터를 적용하되 ('/**'), ('/'), 회원가입('/members/add'), 로그인('/login'), 리소스 조회('/css/**'), 오류 ('/error')와 같은 부분은 로그인 체크 인터셉터를 적용하지 않는다. 서블릿 필터와 비교해보면 매우 편리한 것을 알 수 있다.</p>
+<p>정리<br>
+서블릿 필터와 스프링 인터셉터는 웹과 관련된 공통 관심사를 해결하기 위한 기술이다. <br>
+서블릿 필터와 비교해서 스프링 인터셉터가 개발자 입장에서 훨씬 편리하다는 것을 코드로 이해했을 것이다. 특별한 문제가 없다면 인터셉터를 사용하는 것이 좋다.
+</p>
